@@ -1,4 +1,14 @@
 -------------install-----------
 nest new graphql
 npm i @nestjs/graphql @nestjs/apollo @apollo/server @as-integrations/express5 graphql
+
+-----------prisma--------------
+npm i prisma --save-dev
+npx prisma init
+npm install @prisma/client
+npx prisma generate
+npm install @prisma/adapter-better-sqlite3
+npx prisma migrate dev
+
+-------------format------------
 npx prettier --write .

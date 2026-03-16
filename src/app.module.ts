@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserModule } from './modules/user/user.module';
 import * as path from 'path';
+import { SharedModule } from './shared/shared.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import * as path from 'path';
       autoSchemaFile: path.join('src/schema.gql'),
     }),
     UserModule,
+    SharedModule,
   ],
   controllers: [AppController],
   providers: [AppService],
