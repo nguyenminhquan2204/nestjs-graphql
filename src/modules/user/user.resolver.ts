@@ -1,6 +1,9 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { CreateUserInput, UpdateUserInput, User } from './user.dto';
+import { UsePipes } from '@nestjs/common';
+import { ZodValidationPipe } from 'nestjs-zod';
+import { CreateUserBodySchema, UpdateUserBodySchema } from './user.schema';
 
 @Resolver()
 export class UserResolver {
@@ -17,11 +20,13 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
+  @UsePipes(new ZodValidationPipe(CreateUserBodySchema))
   async createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.userService.create(createUserInput);
   }
 
   @Mutation(() => User)
+  @UsePipes(new ZodValidationPipe(UpdateUserBodySchema))
   async updateUser(
     @Args('id', { type: () => Int }) id: number,
     @Args('updateUserInput') updateUserInput: UpdateUserInput,
