@@ -4,11 +4,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { UserRepo } from './user.repo';
-import { Prisma } from 'generated/prisma/client';
 import {
   isNotFoundPrismaError,
   isUniqueConstraintPrismaError,
 } from 'src/shared/helpers';
+import { CreateUserInput, UpdateUserInput } from './user.dto';
 
 @Injectable()
 export class UserService {
@@ -29,7 +29,7 @@ export class UserService {
     }
   }
 
-  async create(createUserInput: Prisma.UserCreateInput) {
+  async create(createUserInput: CreateUserInput) {
     try {
       return await this.userRepo.create(createUserInput);
     } catch (error) {
@@ -42,7 +42,7 @@ export class UserService {
     }
   }
 
-  async update(id: number, updateUserInput: Prisma.UserUpdateInput) {
+  async update(id: number, updateUserInput: UpdateUserInput) {
     try {
       return await this.userRepo.update(id, updateUserInput);
     } catch (error) {

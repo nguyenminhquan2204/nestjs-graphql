@@ -20,16 +20,18 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  @UsePipes(new ZodValidationPipe(CreateUserBodySchema))
-  async createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
+  async createUser(
+    @Args('createUserInput', new ZodValidationPipe(CreateUserBodySchema))
+    createUserInput: CreateUserInput,
+  ) {
     return this.userService.create(createUserInput);
   }
 
   @Mutation(() => User)
-  @UsePipes(new ZodValidationPipe(UpdateUserBodySchema))
   async updateUser(
     @Args('id', { type: () => Int }) id: number,
-    @Args('updateUserInput') updateUserInput: UpdateUserInput,
+    @Args('updateUserInput', new ZodValidationPipe(UpdateUserBodySchema))
+    updateUserInput: UpdateUserInput,
   ) {
     return this.userService.update(id, updateUserInput);
   }
