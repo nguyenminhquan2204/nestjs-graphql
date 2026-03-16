@@ -6,9 +6,10 @@ import {
   PartialType,
   PickType,
 } from '@nestjs/graphql';
+import { BasePost } from '../post/post.dto';
 
 @ObjectType()
-export class User {
+export class BaseUser {
   @Field(() => Int)
   id: number;
 
@@ -25,9 +26,15 @@ export class User {
   createdAt: Date;
 }
 
+@ObjectType()
+export class User extends BaseUser {
+  @Field(() => [BasePost])
+  posts: BasePost[];
+}
+
 @InputType()
 export class CreateUserInput extends PickType(
-  User,
+  BaseUser,
   ['name', 'email'],
   InputType,
 ) {

@@ -11,7 +11,7 @@ npx prisma init
 npm install @prisma/client
 npx prisma generate
 npm install @prisma/adapter-better-sqlite3
-npx prisma migrate dev
+npx prisma migrate dev --create-only
 
 -------------format------------
 npx prettier --write .

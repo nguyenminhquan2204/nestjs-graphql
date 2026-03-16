@@ -2,10 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type BasePost {
   id: Int!
-  name: String!
-  email: String!
+  title: String!
+  content: String!
+  authorId: Int!
   createdAt: DateTime!
 }
 
@@ -14,15 +15,44 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Post {
+  id: Int!
+  title: String!
+  content: String!
+  authorId: Int!
+  createdAt: DateTime!
+  author: BaseUser!
+}
+
+type BaseUser {
+  id: Int!
+  name: String!
+  email: String!
+  createdAt: DateTime!
+}
+
+type User {
+  id: Int!
+  name: String!
+  email: String!
+  createdAt: DateTime!
+  posts: [BasePost!]!
+}
+
 type Query {
   users: [User!]!
   user(id: Int!): User!
+  posts: [Post!]!
+  post(id: Int!): Post!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(id: Int!, updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
+  createPost(createPostInput: CreatePostInput!): Post!
+  updatePost(id: Int!, updatePostInput: UpdatePostInput!): Post!
+  removePost(id: Int!): Post!
 }
 
 input CreateUserInput {
@@ -35,4 +65,16 @@ input UpdateUserInput {
   name: String
   email: String
   password: String
+}
+
+input CreatePostInput {
+  title: String!
+  content: String!
+  authorId: Int!
+}
+
+input UpdatePostInput {
+  title: String
+  content: String
+  authorId: Int
 }

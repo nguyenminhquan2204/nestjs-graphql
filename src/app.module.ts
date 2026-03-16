@@ -6,6 +6,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserModule } from './modules/user/user.module';
 import * as path from 'path';
 import { SharedModule } from './shared/shared.module';
+import { PostModule } from './modules/post/post.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { SharedModule } from './shared/shared.module';
     }),
     UserModule,
     SharedModule,
+    PostModule,
   ],
   controllers: [AppController],
   providers: [AppService],

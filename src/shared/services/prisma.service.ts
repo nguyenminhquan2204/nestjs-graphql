@@ -6,7 +6,6 @@ import 'dotenv/config';
 @Injectable()
 export class PrismaService extends PrismaClient {
   constructor() {
-    console.log(process.env.DATABASE_URL);
     const adapter = new PrismaBetterSqlite3({ url: process.env.DATABASE_URL });
     super({ adapter });
   }
